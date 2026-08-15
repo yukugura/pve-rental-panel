@@ -31,7 +31,8 @@
    ```sql
    CREATE DATABASE rental_panel CHARACTER SET utf8mb4;
    CREATE USER 'rental'@'localhost' IDENTIFIED BY '強いパスワード';
-   GRANT ALL PRIVILEGES ON rental_panel.* TO 'rental'@'localhost';
+   GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, INDEX, REFERENCES
+     ON rental_panel.* TO 'rental'@'localhost';
    ```
 
 3. `config` ディレクトリを、セットアップ時だけApache実行ユーザーが書き込み可能にします。例: `chmod 770 config`。
