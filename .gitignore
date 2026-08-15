@@ -1,0 +1,6 @@
+# 初回セットアップ時に生成される機密情報。絶対にGitへ登録しない。
+config/config.php
+
+# 開発環境の一時ファイル
+.DS_Store
+Thumbs.db
