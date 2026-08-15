@@ -1,6 +1,9 @@
 Options -Indexes
 DirectoryIndex index.php
 
+# Gitの履歴・リモートURL等を公開しない。
+RedirectMatch 404 /\.git(?:/|$)
+
 <FilesMatch "\.(env|sql|md)$">
     Require all denied
 </FilesMatch>
