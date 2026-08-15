@@ -29,7 +29,8 @@ function pve(array $c, string $method, string $path, array $data = []): mixed {
     $url = rtrim($c['pve_url'], '/') . '/api2/json' . $path;
     $ch = curl_init($url);
     $headers = ['Authorization: PVEAPIToken=' . $c['pve_token_id'] . '=' . $c['pve_token_secret']];
-    curl_setopt_array($ch, [CURLOPT_CUSTOMREQUEST => $method, CURLOPT_RETURNTRANSFER => true, CURLOPT_HTTPHEADER => $headers, CURLOPT_TIMEOUT => 30, CURLOPT_SSL_VERIFYPEER => (bool)$c['pve_verify_tls']]);
+    $verifyTls = (bool)$c['pve_verify_tls'];
+    curl_setopt_array($ch, [CURLOPT_CUSTOMREQUEST => $method, CURLOPT_RETURNTRANSFER => true, CURLOPT_HTTPHEADER => $headers, CURLOPT_TIMEOUT => 30, CURLOPT_SSL_VERIFYPEER => $verifyTls, CURLOPT_SSL_VERIFYHOST => $verifyTls ? 2 : 0]);
     if ($method !== 'GET' && $data) { curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data)); $headers[] = 'Content-Type: application/x-www-form-urlencoded'; curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); }
     $raw = curl_exec($ch); $error = curl_error($ch); $code = (int)curl_getinfo($ch, CURLINFO_RESPONSE_CODE); curl_close($ch);
     $json = json_decode((string)$raw, true);

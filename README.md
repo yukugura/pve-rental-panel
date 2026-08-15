@@ -65,6 +65,8 @@ Proxmox GUIで専用ユーザー（例: `panel@pve`）とAPIトークン（例: 
 
 セットアップ画面には、`panel@pve!rental` のようなToken IDと、発行時に一度だけ表示されるSecretを入力します。
 
+Proxmoxの自己署名証明書を使う場合は、Webサーバーの信頼ストアへ `/etc/pve/pve-root-ca.pem` を登録し、Proxmox URLには証明書のホスト名を使ってください。検証を無効にする設定は接続テスト専用です。
+
 ## 運用上の注意
 
 - Apache側では `AllowOverride All` を有効にしてください。これにより、`config`、SQLファイル、Git管理ディレクトリへの外部アクセスを拒否します。
